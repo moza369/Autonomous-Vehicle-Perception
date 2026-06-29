@@ -13,67 +13,67 @@ This file lists all contributors, their GitHub usernames, and their assigned tea
 | Moza | @moza369 | Team Leader / Repository Maintainer |
 
 ---
-
 # Teams
 
 ## Team 01
 
-| Name      | GitHub    |
-| --------- | --------- |
-| Student 1 | @username |
-| Student 2 | @username |
+| Name         | GitHub        |
+| ------------ | ------------- |
+| Slasli Hafsa | @HafSa-SlaSli |
+| Bahouh Imane | @ImaneBa2002  |
 
 ---
 
 ## Team 02
 
-| Name      | GitHub    |
-| --------- | --------- |
-| Student 1 | @username |
-| Student 2 | @username |
+| Name              | GitHub          |
+| ----------------- | --------------- |
+| El Mouahidi Imane | @Imaneel2442    |
+| Mziguel Samira    | @mziguel-samira |
 
 ---
 
 ## Team 03
 
-| Name      | GitHub    |
-| --------- | --------- |
-| Student 1 | @username |
-| Student 2 | @username |
+| Name                    | GitHub     |
+| ----------------------- | ---------- |
+| Mohamed Amine Chablaoui | @Amine0210 |
+| Bouhjar Mohamed         | @username  |
 
 ---
 
 ## Team 04
 
-| Name      | GitHub    |
-| --------- | --------- |
-| Student 1 | @username |
-| Student 2 | @username |
+| Name          | GitHub            |
+| ------------- | ----------------- |
+| Fatima Chahid | @fatimachahid-cmd |
+| Manal Jimi    | @JimiManal        |
 
 ---
 
 ## Team 05
 
-| Name      | GitHub    |
-| --------- | --------- |
-| Student 1 | @username |
-| Student 2 | @username |
+| Name           | GitHub         |
+| -------------- | -------------- |
+| Imane Chaabani | @ImaneC07      |
+| Dikra Habsaoui | @habsaouidikra |
+| Idiatou Condé  | @Idiatouconde  |
 
 ---
 
 ## Team 06
 
-| Name      | GitHub    |
-| --------- | --------- |
-| Student 1 | @username |
-| Student 2 | @username |
+| Name           | GitHub          |
+| -------------- | --------------- |
+| Maryam Toubali | @maryam-toubali |
+| Safae Ahmian   | @username       |
 
 ---
 
 ## Team 07
 
 | Name             | GitHub             |
-| -----------------| -------------------|
+| ---------------- | ------------------ |
 | Zahir Mohamed    | @moza369           |
 | Boujaada Mohamed | @mohammed-boujaada |
 
@@ -81,21 +81,22 @@ This file lists all contributors, their GitHub usernames, and their assigned tea
 
 ## Team 08
 
-| Name      | GitHub    |
-| --------- | --------- |
-| Student 1 | @username |
-| Student 2 | @username |
+| Name           | GitHub         |
+| -------------- | -------------- |
+| Amal Dahmazi   | @AmalDahmazi05 |
+| Manal Touhami  | @ManalTouhami  |
+| Ikrame Ben Said| @Ikramebsd     |
 
 ---
 
 ## Team 09
 
-| Name      | GitHub    |
-| --------- | --------- |
-| Student 1 | @username |
-| Student 2 | @username |
+| Name                | GitHub         |
+| ------------------- | -------------- |
+| Abdelilah Touhami   | @ |
+| Mohamed Alaoui      | @  |
 
----
+
 
 # Contribution Policy
 
