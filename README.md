@@ -80,8 +80,10 @@ Repository Maintainer
 </td>
 
 <td align="center">
-<b>Bouhjar Mohamed</b><br>
-<sub>GitHub: Pending</sub>
+<a href="https://github.com/mohamed-bouhjar-miate">
+<img src="https://github.com/mohamed-bouhjar-miate.png" width="90px;" alt="Bouhjar"/><br>
+<b>Bouhjar Mohamed</b>
+</a>
 </td>
 </tr>
 </table>
