@@ -153,8 +153,10 @@ Repository Maintainer
 </td>
 
 <td align="center">
-<b>Safae Ahmian</b><br>
-<sub>GitHub: Pending</sub>
+<a href="https://github.com/SafaeAhm">
+<img src="https://github.com/SafaeAhm.png" width="90px;" alt="Safae"/><br>
+<b>Safae Ahmian</b>
+</a>
 </td>
 </tr>
 </table>
@@ -226,7 +228,7 @@ Repository Maintainer
 <td align="center">
 <a href="https://github.com/alaouimed97">
 <img src="https://github.com/alaouimed97.png" width="90px;" alt="Alaoui"/><br>
-<b>Mohame Alaoui</b>
+<b>Mohamed Alaoui</b>
 </a>
 </td>
 </tr>
