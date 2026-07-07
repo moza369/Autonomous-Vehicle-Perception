@@ -12,12 +12,16 @@ The vehicle is assumed to be moving at 60 km/h.
 
 If the driver looks down, the system displays:
 
+```text
 WARNING: EYES ON ROAD
+```
 
 If the driver does not correct their attention after 3 seconds, the system displays:
 
-ACTION: DISENGAGING CRUISE CONTROL  
+```text
+ACTION: DISENGAGING CRUISE CONTROL
 SLOWING DOWN
+```
 
 The system also simulates a progressive reduction of the vehicle speed.
 
@@ -29,13 +33,21 @@ OpenCV is used to:
 
 - open the webcam;
 - read video frames in real time;
-- draw text on the video;
+- draw text and visual information on the video;
 - display the output window;
 - manage keyboard input such as pressing `q` to quit.
 
 ### MediaPipe Face Mesh
 
-MediaPipe Face Mesh is used to detect facial landmarks. These landmarks allow the system to analyze the driver's face, eyes, nose, chin and head position.
+MediaPipe Face Mesh is used to detect facial landmarks on the driver's face.
+
+These landmarks allow the system to analyze:
+
+- head position;
+- eye position;
+- nose position;
+- chin position;
+- eye openness.
 
 ### NumPy
 
@@ -43,7 +55,7 @@ NumPy is used for numerical calculations, especially to compute distances betwee
 
 ## Detection Method
 
-The system uses two main indicators:
+The system combines two main indicators.
 
 ### 1. Head Down Score
 
@@ -69,23 +81,32 @@ If the EAR value is too low, this may indicate that the eyes are nearly closed o
 
 The driver is considered distracted if at least one of the following conditions is true:
 
+```text
 down_score > DOWN_SCORE_THRESHOLD
+```
 
 or:
 
+```text
 average_ear < EAR_THRESHOLD
+```
 
 If one of these conditions is true, the system displays:
 
+```text
 WARNING: EYES ON ROAD
+```
 
 If the warning continues for more than 3 seconds, the system displays:
 
-ACTION: DISENGAGING CRUISE CONTROL  
+```text
+ACTION: DISENGAGING CRUISE CONTROL
 SLOWING DOWN
+```
 
 ## Project Structure
 
+```text
 scenario_1_driver_distraction/
 │
 ├── config.py
@@ -94,6 +115,7 @@ scenario_1_driver_distraction/
 ├── requirements.txt
 ├── README.md
 └── outputs/
+```
 
 ## File Description
 
@@ -139,13 +161,17 @@ This file contains the Python libraries required to run the scenario.
 
 From the project root folder, install the dependencies with:
 
+```bash
 pip install -r scenario_1_driver_distraction/requirements.txt
+```
 
 ## Execution
 
 From the project root folder, run:
 
+```bash
 python scenario_1_driver_distraction/main.py
+```
 
 ## How to Test
 
@@ -153,18 +179,24 @@ python scenario_1_driver_distraction/main.py
 2. Look normally at the webcam.
 3. The system should display:
 
+```text
 DRIVER ATTENTIVE
+```
 
 4. Look down as if using a phone.
 5. The system should display:
 
+```text
 WARNING: EYES ON ROAD
+```
 
 6. Keep looking down for more than 3 seconds.
 7. The system should display:
 
-ACTION: DISENGAGING CRUISE CONTROL  
+```text
+ACTION: DISENGAGING CRUISE CONTROL
 SLOWING DOWN
+```
 
 8. Press `q` to quit the program.
 
