@@ -21,11 +21,11 @@ class SafetySystem:
             self.airbag = "ENABLED"
             self.speed_limit = self.current_speed
 
-        # Posture incorrecte mais ceinture attachee
+        # Posture dangereuse mais ceinture attachée
         elif not seatbelt_off and out_of_position:
-            self.state = "WARNING"
-            self.airbag = "DISABLED"
-            self.speed_limit = None
+           self.state = "WARNING"
+           self.airbag = "ENABLED"
+           self.speed_limit = None
 
         # Ceinture détachee et mauvaise posture
         else:
