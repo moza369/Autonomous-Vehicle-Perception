@@ -25,7 +25,7 @@ When both signals are detected simultaneously, the system triggers an alert and 
 
 | File | Description |
 |------|-------------|
-| `scenario 9.py` | Main detection script |
+| `main.py` | Main detection script |
 | `ambulance.mp4` | Test video of an approaching ambulance |
 | `requirements.txt` | Python dependencies |
 
@@ -54,12 +54,12 @@ pip install -r requirements.txt
 
 **With webcam (real-time):**
 ```bash
-python "scenario 9.py"
+python main.py
 ```
 
 **With video file:**
 
-In `scenario 9.py`, replace line 7:
+In `main.py`, replace line 7:
 ```python
 # Change this:
 video = cv2.VideoCapture(0, cv2.CAP_DSHOW)
