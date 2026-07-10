@@ -299,10 +299,15 @@ In a production vehicle, this information would be obtained from the dedicated s
 The objective of this project is to demonstrate the complete perception and decision-making pipeline of an ADAS system rather than control a real vehicle.
 
 ---
+## Future Improvements
 
+- Detect the real seatbelt status using dedicated vehicle sensors.
+- Improve posture estimation under different lighting conditions.
+- Integrate the system with real ADAS hardware.
+  
 # Team Contribution
 
-This scenario was developed as part of the collaborative **Autonomous Vehicle Perception** project.
+This scenario was developed as part of the collaborative **Autonomous Vehicle Perception** project
 
 The work is organized as follows:
 
