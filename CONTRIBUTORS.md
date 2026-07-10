@@ -93,8 +93,8 @@ This file lists all contributors, their GitHub usernames, and their assigned tea
 
 | Name                | GitHub         |
 | ------------------- | -------------- |
-| Abdelilah Touhami   | @Abdelilah1-h1 |
-| Mohamed Alaoui      | @alaouimed97   |
+| Abdelilah Touhami   | @ |
+| Mohamed Alaoui      | @  |
 
 
 
