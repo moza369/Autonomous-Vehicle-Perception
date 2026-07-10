@@ -65,11 +65,11 @@ class PoseDetector:
 
             # Label d'affichage
             if leaning and feet_up:
-                info["label"] = "LEANING & FEET ON DASHBOARD"
+                info["label"] = "OUT OF POSITION (LEANING + FEET ON DASHBOARD)"
             elif leaning:
-                info["label"] = "LEANING FORWARD"
+                info["label"] = "OUT OF POSITION (LEANING FORWARD)"
             elif feet_up:
-                info["label"] = "FEET ON DASHBOARD"
+                info["label"] = "OUT OF POSITION (FEET ON DASHBOARD)"
             else:
                 info["label"] = "SAFE"
 
