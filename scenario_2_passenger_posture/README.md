@@ -317,3 +317,4 @@ The work is organized as follows:
 * **audio.py** – warning sound management;
 * **main.py** – real-time execution;
 * **README.md** – project documentation.
+* **team 2**
