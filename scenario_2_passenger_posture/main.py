@@ -88,7 +88,7 @@ while True:
         overlay = frame.copy()
         cv2.rectangle(overlay, (0, h - 70), (w, h - 20), (0, 120, 200), -1)
         cv2.addWeighted(overlay, 0.7, frame, 0.3, 0, frame)
-        cv2.putText(frame, f"WARNING: PASSENGER {posture_info['label'].upper()} - AIRBAG DISABLED", (10, h - 35), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 255, 255), 2)
+        cv2.putText(frame, "WARNING: PASSENGER OUT OF POSITION", (10, h - 35), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (255, 255, 255), 2)
 
     # Raccourcis clavier pour tester
     cv2.putText(frame, "Press S : Toggle Seatbelt | ESC : Exit", (20, 320), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
