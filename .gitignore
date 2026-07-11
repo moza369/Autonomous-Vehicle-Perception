@@ -220,3 +220,6 @@ scenario_4_drivable_area/datasets/
 scenario_4_drivable_area/models/*.onnx
 scenario_4_drivable_area/outputs/
 
+scenario_4_drivable_area/YOLOP/YOLOP-main/weights/*.pth
+scenario_4_drivable_area/YOLOP/YOLOP-main/inference/videos/
+
