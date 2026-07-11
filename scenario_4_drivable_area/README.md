@@ -21,8 +21,8 @@ NB : Ce projet implémente la détection de zone praticable (drivable area) à p
     
     SCENARIO_4_DRIVABLE_AREA/
     ├── src/              # Code source (lane_detection.py)
-    ├── models/           # Modèle ONNX (yolov8n-seg.onnx)
-    ├── datasets/         # Dataset BDD100K 
+    ├── models/           # Modèle ONNX (yolov8n-seg.onnx) lien drive : https://drive.google.com/drive/folders/1LkSNqhx-AFARF89v4HnmBwZzwsu2dqty?usp=drive_link
+    ├── datasets/         # Dataset BDD100K , lien drive :
     ├── results/          # Exemples de sorties
     ├── requirements.txt  # Dépendances Python
     └── README.md         # Documentation
@@ -30,6 +30,11 @@ NB : Ce projet implémente la détection de zone praticable (drivable area) à p
 ```
 
 ##  Installation
+Pour Télécharger le modèle entraîné
+Le modèle YOLOv8-seg (ONNX) n'est pas inclus dans ce repo (trop volumineux pour GitHub).
+
+Télécharge-le ici :
+[yolov8n-seg.onnx (Google Drive)](https://drive.google.com/drive/folders/1LkSNqhx-AFARF89v4HnmBwZzwsu2dqty?usp=drive_link)
 
 ```bash
 pip install -r requirements.txt
