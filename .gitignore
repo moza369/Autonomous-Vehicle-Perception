@@ -216,7 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-scenario_4_drivable_area/datasets/
+
 scenario_4_drivable_area/models/*.onnx
 scenario_4_drivable_area/outputs/
 
