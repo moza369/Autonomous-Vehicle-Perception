@@ -1,17 +1,19 @@
 # Question 6: Construction Zone Detection Module
 
-Ce module fait partie du système ADAS. Il est conçu pour détecter les cônes de chantier orange et les déviations temporaires de trajectoire afin d'informer l'unité centrale de contrôle de la nécessité de désactiver l'aide au maintien de voie standard et de se rabattre à gauche.
-
+This module uses a classical computer vision pipeline based on HSV color segmentation, morphological filtering, contour detection, and geometric analysis to detect orange construction cones. When multiple cones are detected, the system identifies a construction zone and displays the required ADAS action.
 
 ## Structure du Module
 
 ```text
 construction_zone/
-├── __init__.py          # Point d'entrée du package Python
-├── detector.py          # Logique de traitement d'image et prise de décision
-├── demo.py              # Script de test et simulation autonome
-├── requirements.txt     # Dépendances du module
-└── README.md            
+├── main.py
+├── detector.py
+├── requirements.txt
+├── README.md
+├── test_images/
+│   └── construction_zone_real.jpg
+└── results/
+    └── output_construction_zone_real.png         
 ```
 
 
@@ -31,4 +33,11 @@ La méthode `process_image` retourne trois éléments :
    * `'cones_coordinates'` (`list[tuple[int, int]]`) : Coordonnées pixel $(x, y)$ au sol des cônes détectés.
    * `'fitted_line'` (`tuple[tuple[int,int], tuple[int,int]]` ou `None`) : Points $(x1, y1)$ et $(x2, y2)$ délimitant la ligne virtuelle ajustée.
    * `'slope'` (`float`) : Pente de la droite ajustée (sert à mesurer la sévérité de l'empiètement).
+
+## Run the real construction zone test
+
+```bash
+python main.py
+
+
 
