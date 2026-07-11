@@ -12,8 +12,9 @@ construction_zone/
 ├── README.md
 ├── test_images/
 │   └── construction_zone_real.jpg
-└── results/
-    └── output_construction_zone_real.png         
+├── test_video/
+    └── construction_zone_video.mp4
+    
 ```
 
 
