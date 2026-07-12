@@ -1,0 +1,34 @@
+# ============================================================
+# Traffic Sign and Signal Recognition (TSR) — requirements.txt
+# ============================================================
+# Deep-learning perception & decision-making pipeline for
+# autonomous driving (YOLOv8 / YOLO11, Ultralytics, PyTorch).
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# Note: torch / torchvision are installed automatically as
+# dependencies of ultralytics. If you need a specific CUDA
+# build, install torch first from https://pytorch.org/get-started/locally/
+# before installing the rest of this file.
+# ============================================================
+
+# --- Core detection framework (YOLOv8 / YOLO11) --------------
+ultralytics==8.3.40
+
+# --- Deep learning backend ------------------------------------
+torch>=2.1.0
+torchvision>=0.16.0
+
+# --- Computer vision / video I/O -------------------------------
+opencv-python==4.10.0.84
+
+# --- Data wrangling, config, plotting, metrics ------------------
+numpy>=1.26.0
+pandas>=2.1.0
+PyYAML>=6.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+scikit-learn>=1.3.0
+tqdm>=4.66.0
+Pillow>=10.0.0
