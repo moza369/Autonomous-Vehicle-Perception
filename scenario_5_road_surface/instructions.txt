@@ -1,0 +1,155 @@
+Dikra Habsaoui- Imane Chaabani- Condé Idiatou 
+TEAM 5 - ROAD SURFACE CONDITION DETECTION
+RUNNING INSTRUCTIONS
+
+1. OPEN POWERSHELL
+
+Open PowerShell and go to the Team 5 project folder:
+
+cd C:\Users\Hp\Desktop\Autonomous-Vehicle-Perception\scenario_5_road_surface
+
+
+2. ACTIVATE THE VIRTUAL ENVIRONMENT
+
+Run:
+
+.\.venv\Scripts\Activate.ps1
+
+After activation, PowerShell should show:
+
+(.venv)
+
+
+3. INSTALL THE REQUIRED LIBRARIES
+
+This is normally needed only the first time, or after changing requirements.txt:
+
+pip install -r requirements.txt
+
+
+4. RUN THE PROGRAM
+
+Important:
+- Run all commands from inside the scenario_5_road_surface folder.
+- Image results are saved in the output folder.
+- Video results are also saved in the output folder.
+- For image mode, press any key inside the OpenCV window to close it.
+- For video or camera mode, press Q inside the OpenCV window to stop.
+
+
+5. TEST THE DRY-ROAD IMAGE
+
+python main.py --mode image --input input\dry_road.jpg --output output\dry_result.jpg
+
+
+6. TEST THE WET-ROAD IMAGE
+
+python main.py --mode image --input input\wet_road.jpg --output output\wet_result.jpg
+
+Expected case-study behavior:
+- WARNING: WET ROAD DETECTED
+- ACTION: REDUCING MAXIMUM SPEED
+- Traction control is increased.
+- Maximum vehicle speed is reduced.
+
+
+7. TEST THE SNOW-ROAD IMAGE
+
+python main.py --mode image --input input\snow_road.jpg --output output\snow_result.jpg
+
+
+8. TEST THE LARGE-POTHOLE IMAGE
+
+python main.py --mode image --input input\large_pothole.jpg --output output\pothole_result.jpg
+
+If your pothole image has a different filename, replace large_pothole.jpg with the correct filename.
+
+
+9. TEST A ROAD VIDEO
+
+Example for the wet-road video:
+
+python main.py --mode video --input input\wet_road_video.mp4 --output output\wet_video_result.mp4
+
+Press Q inside the video window to stop before the video ends.
+
+
+
+Example for the icy-road video:
+
+python main.py --mode video --input input\icy_road.mp4 --output output\icy_video_result.mp4 
+
+Press Q inside the video window to stop before the video ends.
+
+
+
+If your video has a different filename, replace it with the correct filename.
+
+
+10. RUN THE CAMERA / WEBCAM MODE
+
+python main.py --mode camera
+
+The default camera is used.
+
+Press Q inside the camera window to stop.
+
+
+11. DEBUG MODE
+
+It is preferable to run the normal demonstration without --debug because the display is cleaner and easier to present.
+
+Normal example:
+
+python main.py --mode image --input input\wet_road.jpg --output output\wet_result.jpg
+
+To display more technical details, add --debug at the end:
+
+python main.py --mode image --input input\wet_road.jpg --output output\wet_result_debug.jpg --debug
+
+Video debug example:
+
+python main.py --mode video --input input\wet_road_video.mp4 --output output\wet_video_debug.mp4 --debug
+
+Camera debug example:
+
+python main.py --mode camera --debug
+
+Depending on the current version of main.py, debug mode may display:
+- feature measurements;
+- Canny edges;
+- morphological closing results;
+- the large-pothole mask;
+- additional information used by the detector.
+
+Use debug mode when explaining the computer-vision techniques or troubleshooting the detector. Use normal mode for the final demonstration.
+
+
+12. GENERAL COMMAND FORMAT
+
+Image:
+
+python main.py --mode image --input input\IMAGE_NAME.jpg --output output\RESULT_NAME.jpg
+
+Video:
+
+python main.py --mode video --input input\VIDEO_NAME.mp4 --output output\RESULT_NAME.mp4
+
+Camera:
+
+python main.py --mode camera
+
+
+13. DEACTIVATE THE VIRTUAL ENVIRONMENT
+
+After finishing, run:
+
+deactivate
+
+
+14. NOTES
+
+- The project is a classroom prototype based on traditional computer-vision techniques.
+- It uses preprocessing, filtering, contrast enhancement, thresholding, Canny edge detection, morphology, contour analysis, and decision logic.
+- Detection quality depends on lighting, camera position, road visibility, and image quality.
+- The system must not be used to control a real vehicle.
