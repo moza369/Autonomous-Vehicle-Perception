@@ -9,21 +9,20 @@
 
 ##  Aperçu du projet
 
-Ce notebook implémente un pipeline complet et entraînable de deep learning qui :
+Ce dépôt contient **deux livrables complémentaires** :
 
-1. **Détecte** les panneaux de limitation de vitesse, les panneaux stop et l'état des feux
-   de signalisation (rouge / jaune / vert) à l'aide d'un détecteur d'objets
-   **YOLOv8 / YOLO11** (Ultralytics, PyTorch) entraîné from scratch sur des jeux de données
-   réels — **aucune vision par ordinateur classique** (seuillage HSV, cercles de Hough,
-   contours, template matching) n'est utilisée comme détecteur principal.
-2. **Convertit** les détections en décisions de conduite via un module `VehicleState` +
-   `DecisionEngine` : adaptation de vitesse, freinage d'urgence, calcul physique de la
-   distance d'arrêt.
-3. **Fonctionne en temps réel** sur webcam, fichier vidéo ou image fixe via OpenCV, avec un
-   affichage tête haute (HUD) moderne inspiré des tableaux de bord Tesla.
-4. **Reproduit l'étude de cas** de l'énoncé : un feu passant du jaune au rouge lorsque le
-   véhicule approche d'une intersection, déclenchant un freinage d'urgence avec un calcul
-   de distance d'arrêt.
+| Fichier | Rôle |
+|---|---|
+| `TSR_Traffic_Sign_Signal_Recognition.ipynb` | Notebook complet : préparation des datasets, entraînement YOLO11, évaluation, et démonstration temps réel intégrée. |
+| `Test_model.py` | Script Python **autonome** qui recharge un modèle déjà entraîné (`best.pt`) et exécute le pipeline détection + décision sur un **fichier vidéo local**, sans dépendance à Colab/Jupyter — pratique pour un déploiement ou une démo hors notebook. |
+
+Les deux composants partagent :
+
+1. **La même taxonomie de classes** et le **même détecteur d'objets** entraîné (**YOLOv8 / YOLO11**, Ultralytics, PyTorch) — **aucune vision par ordinateur classique** (seuillage HSV, cercles de Hough, contours, template matching) n'est utilisée comme détecteur principal.
+2. **La même logique de décision** (`VehicleState` + `DecisionEngine`) : adaptation de vitesse, freinage d'urgence, calcul physique de la distance d'arrêt.
+3. Un affichage tête haute (HUD) moderne inspiré des tableaux de bord Tesla.
+
+`Test_model.py` va plus loin que le notebook sur un point : il lit la **valeur exacte** inscrite sur un panneau de limitation de vitesse via OCR (EasyOCR), là où le notebook utilise une vitesse par défaut configurable (cf. section « Différences entre le notebook et `Test_model.py` » ci-dessous).
 
 ---
 
@@ -35,18 +34,68 @@ Ce notebook implémente un pipeline complet et entraînable de deep learning qui
 | 2 | Chargement des datasets (upload manuel local) |
 | 3 | Prétraitement, nettoyage et conversion au format YOLO |
 | 4 | Split Train / Validation / Test + génération de `data.yaml` |
-| 5 | Entraînement (YOLOv8 / YOLO11, Ultralytics) |
+| 5 | Entraînement (YOLO11, Ultralytics) |
 | 6 | Évaluation (Précision/Rappel/mAP50/mAP50-95, matrice de confusion, courbes) |
 | 7 | Inférence — image / vidéo / webcam |
 | 8 | Boucle de détection temps réel OpenCV + HUD |
 | 9 | Logique de décision véhicule (`VehicleState`, `DecisionEngine`, distance d'arrêt) |
 | 10 | Implémentation de l'étude de cas |
-| 11 | Démo finale intégrée |
+| 11 | Démo finale intégrée (+ démonstration sur vidéo réelle, vérification des classes, tableau de performance par classe) |
 
 > **Environnement d'exécution :** ce notebook nécessite un GPU compatible CUDA (testé sur
 > Google Colab, GPU Tesla T4). Les datasets sont chargés depuis des archives ZIP uploadées
 > manuellement (Section 2) — aucun compte ni token Kaggle n'est requis. Toutes les cellules
 > sont entièrement implémentées et s'exécutent de bout en bout, sans placeholder.
+
+---
+
+##  `Test_model.py` — script d'inférence autonome
+
+Une fois `best.pt` obtenu (via l'entraînement du notebook, Section 5), `Test_model.py` permet de rejouer le pipeline complet (détection + décision + HUD) sur une vidéo locale, **sans rouvrir le notebook** :
+
+```bash
+python Test_model.py
+```
+
+Par défaut, le script attend dans **son propre dossier** :
+
+- `best.pt` — les poids du modèle entraîné,
+- `trafic5.mp4` — la vidéo d'entrée (modifiable via la constante `VIDEO_PATH` en tête de script).
+
+La vidéo annotée est écrite dans `results/demo_result.mp4`, et chaque nouvelle action (freinage, avertissement, changement de limite) est aussi affichée dans la console au moment où elle se déclenche.
+
+**Variables d'environnement utiles :**
+
+| Variable | Effet |
+|---|---|
+| `FORCE_CPU=1` | Force l'exécution sur CPU même si un GPU CUDA est disponible. |
+
+### Emplacement des poids : notebook vs script
+
+Le notebook entraîne et sauvegarde le modèle dans :
+
+```
+tsr_project/runs/tsr_yolo11n/weights/best.pt
+```
+
+`Test_model.py`, lui, cherche `best.pt` **directement dans le dossier où il est exécuté**. Après l'entraînement dans le notebook, copie (ou télécharge puis place) le fichier de poids à côté de `Test_model.py` :
+
+```bash
+cp tsr_project/runs/tsr_yolo11n/weights/best.pt ./best.pt
+```
+
+(Sur Colab, ce fichier peut être téléchargé directement depuis le panneau de fichiers, ou via `google.colab.files.download(...)`.)
+
+### Différences entre le notebook et `Test_model.py`
+
+| Aspect | Notebook (Sections 7-11) | `Test_model.py` |
+|---|---|---|
+| Environnement | Google Colab / Jupyter | Script Python autonome (n'importe quelle machine) |
+| Source vidéo | Image / vidéo / webcam (y compris webcam navigateur en Colab) | Fichier vidéo local uniquement |
+| Valeur lue sur un panneau de limitation | Valeur par défaut configurable (`DEFAULT_SPEED_LIMIT_KMH`, pas d'OCR dans le notebook) | **Lecture OCR réelle** de la valeur inscrite sur le panneau (EasyOCR), avec repli sur la valeur par défaut si l'OCR échoue ou n'est pas installé |
+| Dépendance OCR | Aucune | `easyocr` (optionnelle : le script continue de fonctionner sans, avec un avertissement) |
+
+Ces deux chemins utilisent la **même taxonomie de classes**, le **même modèle entraîné**, et la **même logique de décision** — seule la source d'entrée et la lecture (ou non) de la valeur exacte du panneau diffèrent.
 
 ---
 
@@ -56,28 +105,34 @@ Ce notebook implémente un pipeline complet et entraînable de deep learning qui
 Datasets bruts (ZIP)
         │
         ▼
-Prétraitement / nettoyage / conversion YOLO  (Section 3)
+Prétraitement / nettoyage / conversion YOLO  (Notebook, Section 3)
         │
         ▼
-Split Train / Val / Test + data.yaml          (Section 4)
+Split Train / Val / Test + data.yaml          (Notebook, Section 4)
         │
         ▼
-Entraînement YOLO11n (Ultralytics)            (Section 5)
+Entraînement YOLO11n (Ultralytics)            (Notebook, Section 5)
         │
         ▼
-Évaluation (mAP, matrice de confusion)        (Section 6)
+Évaluation (mAP, matrice de confusion)        (Notebook, Section 6)
         │
         ▼
-Inférence temps réel (image/vidéo/webcam)     (Sections 7-8)
-        │
-        ▼
-DecisionEngine (freinage, distance d'arrêt)   (Section 9)
-        │
-        ▼
-Étude de cas + démo finale (HUD)              (Sections 10-11)
+best.pt ─────────────┬─────────────────────────────────────────┐
+                      │                                         │
+                      ▼                                         ▼
+        Inférence temps réel (Notebook,          Inférence sur vidéo locale
+        image/vidéo/webcam, Sections 7-8)         (Test_model.py, autonome)
+                      │                                         │
+                      ▼                                         ▼
+        DecisionEngine (freinage, distance)      DecisionEngine (identique)
+        + OCR optionnel (valeur par défaut)      + OCR EasyOCR (valeur lue)
+                      │                                         │
+                      ▼                                         ▼
+        Étude de cas + démo finale (HUD)         Vidéo annotée + log console
+        (Notebook, Sections 9-11)                 (results/demo_result*.mp4)
 ```
 
-**Taxonomie unifiée des classes détectées :**
+**Taxonomie unifiée des classes détectées (identique dans le notebook et `Test_model.py`) :**
 
 ```python
 CLASSES = ["speed_limit", "stop", "traffic_light_red", "traffic_light_yellow", "traffic_light_green"]
@@ -134,17 +189,26 @@ python -m venv venv
 source venv/bin/activate      # Linux/Mac
 venv\Scripts\activate         # Windows
 
-# Installer les dépendances
+# Installer les dépendances (couvre le notebook ET Test_model.py)
 pip install -r requirements.txt
 ```
 
 >  Le notebook a été conçu et testé sur **Google Colab** (GPU Tesla T4, CUDA). Il peut
 > aussi tourner en local si vous disposez d'un GPU compatible CUDA ; sans GPU, l'entraînement
 > fonctionnera mais sera nettement plus lent (device basculé automatiquement sur `cpu`).
+> `Test_model.py` suit la même règle : GPU utilisé automatiquement s'il est disponible,
+> repli sur `cpu` sinon (ou forcé via `FORCE_CPU=1`).
+
+`requirements.txt` inclut `easyocr`, utilisé uniquement par `Test_model.py` pour lire la
+valeur exacte des panneaux de limitation de vitesse. Cette dépendance est optionnelle :
+si elle n'est pas installée, `Test_model.py` continue de fonctionner (avertissement affiché,
+repli sur la valeur de vitesse par défaut) — le notebook, lui, n'en a jamais besoin.
 
 ---
 
 ##  Utilisation
+
+### A. Entraîner et évaluer via le notebook
 
 1. **Ouvrir le notebook** `TSR_Traffic_Sign_Signal_Recognition.ipynb` sur Google Colab (ou
    Jupyter en local).
@@ -154,21 +218,36 @@ pip install -r requirements.txt
    `manual_uploads/` indiqué par le notebook si vous n'êtes pas sur Colab).
 4. **Sections 3 à 4** : exécuter le nettoyage, la conversion YOLO et le split train/val/test.
 5. **Section 5** : lancer l'entraînement (modèle de base : `yolo11n.pt`, modifiable via
-   `MODEL_VARIANT`).
+   `MODEL_VARIANT`). Les poids sont sauvegardés dans
+   `tsr_project/runs/tsr_yolo11n/weights/best.pt`.
 6. **Section 6** : consulter les métriques d'évaluation (Précision, Rappel, mAP50, mAP50-95,
    matrice de confusion).
 7. **Sections 7 à 11** : lancer l'inférence sur image/vidéo/webcam, la démo temps réel avec
    HUD, et l'étude de cas (transition feu jaune → rouge avec freinage d'urgence).
 
+### B. Rejouer l'inférence hors notebook avec `Test_model.py`
+
+1. Récupérer `best.pt` depuis `tsr_project/runs/tsr_yolo11n/weights/best.pt` (notebook,
+   Section 5) et le placer **dans le même dossier** que `Test_model.py`.
+2. Placer votre vidéo d'entrée dans ce même dossier (nom par défaut attendu : `trafic5.mp4`,
+   modifiable via `VIDEO_PATH` en tête de script).
+3. Installer les dépendances si ce n'est pas déjà fait : `pip install -r requirements.txt`.
+4. Lancer :
+   ```bash
+   python Test_model.py
+   ```
+5. Récupérer la vidéo annotée dans `results/demo_result5.mp4` ; suivre le log console pour
+   voir chaque ACTION/WARNING déclenchée avec son horodatage.
+
 ---
 
 ##  Logique de décision du véhicule
 
-Le module `DecisionEngine` traduit chaque détection en action de conduite :
+Le module `DecisionEngine` (identique dans le notebook et `Test_model.py`) traduit chaque détection en action de conduite :
 
 | Détection | Action |
 |---|---|
-| Panneau limitation de vitesse | Mise à jour de `target_speed_kmh` selon la limite affichée |
+| Panneau limitation de vitesse | Mise à jour de `target_speed_kmh` selon la limite affichée (lue par OCR dans `Test_model.py`, valeur par défaut dans le notebook) |
 | Panneau Stop | Freinage d'urgence |
 | Feu rouge | Freinage d'urgence |
 | Feu jaune | Avertissement : « Prepare to Stop » |
@@ -190,16 +269,20 @@ $\mu = 0{,}7$ (asphalte sec), $g = 9{,}81\,m/s^2$ — les deux premiers sont con
 
 ##  Résultats et évaluation
 
-Le notebook génère automatiquement, dans le dossier `results/` :
+Le notebook génère automatiquement, dans le dossier `tsr_project/runs/` :
 
 - Les courbes de perte train/val (`results.csv` d'Ultralytics)
 - La matrice de confusion et les courbes Précision/Rappel
 - Un tableau récapitulatif par classe (`per_class_metrics.csv`) : Précision, Rappel, mAP50,
   mAP50-95, nombre d'images et d'instances par classe sur le jeu de test
-- Une vidéo de démonstration annotée (`results/demo_result.mp4`) sur données réelles
 
-Une vérification dédiée (« Traffic Light Class Verification ») s'assure également que le
-modèle entraîné distingue bien les **3 états du feu** de façon individuelle, et n'a pas
+`Test_model.py` génère, dans le dossier `results/` (créé à côté du script) :
+
+- Une vidéo de démonstration annotée (`results/demo_result5.mp4` par défaut)
+- Un log console horodaté de chaque ACTION/WARNING déclenchée
+
+Une vérification dédiée (« Traffic Light Class Verification », notebook) s'assure également
+que le modèle entraîné distingue bien les **3 états du feu** de façon individuelle, et n'a pas
 fusionné ou perdu de classe pendant l'entraînement.
 
 ---
@@ -215,6 +298,10 @@ utilisés en perception pour la conduite autonome :
 - **Fort ensoleillement / éblouissement** : lavage des couleurs du feu ou du revêtement
   rétroréfléchissant des panneaux
 - **Flou de mouvement / vibrations caméra** : à vitesse élevée ou sur route dégradée
+- **Lecture OCR (`Test_model.py` uniquement)** : la valeur exacte d'un panneau peut être mal
+  lue (ou pas lue du tout) en cas de faible résolution, d'angle prononcé ou de panneau
+  partiellement occulté — le repli sur `DEFAULT_SPEED_LIMIT_KMH` couvre ce cas, mais la
+  vitesse cible appliquée peut alors ne pas correspondre à la limite réelle affichée.
 
 ---
 
@@ -222,22 +309,23 @@ utilisés en perception pour la conduite autonome :
 
 ```
 .
-├── TSR_Traffic_Sign_Signal_Recognition.ipynb   # Notebook principal
-├── requirements.txt                             # Dépendances Python
+├── TSR_Traffic_Sign_Signal_Recognition.ipynb   # Notebook principal (entrainement + demo integree)
+├── Test_model.py                                # Script d'inference autonome (video locale)
+├── requirements.txt                             # Dependances Python (notebook + script)
 ├── README.md                                    # Ce fichier
-└── results/                                     # Généré à l'exécution
-    ├── weights/best.pt
-    ├── per_class_metrics.csv
-    ├── confusion_matrix.png
-    └── demo_result.mp4
+├── best.pt                                       # A placer ici pour Test_model.py (voir Installation/Utilisation)
+└── results/                                     # Genere a l'execution
+    ├── demo_result.mp4                          # Sortie de Test_model.py
+    └── ...                                       # Sorties du notebook (weights/, per_class_metrics.csv, confusion_matrix.png, ...)
 ```
 
 ---
 
 ##  Stack technique
 
-- **Détection d'objets :** Ultralytics YOLOv8 / YOLO11 (PyTorch)
+- **Détection d'objets :** Ultralytics \ YOLO11 (PyTorch)
 - **Vision par ordinateur / vidéo :** OpenCV
+- **Lecture de texte sur panneaux (`Test_model.py`) :** EasyOCR (optionnel)
 - **Data science :** NumPy, pandas, scikit-learn
 - **Visualisation :** Matplotlib, Seaborn
 - **Divers :** PyYAML, Pillow, tqdm
