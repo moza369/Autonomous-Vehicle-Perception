@@ -55,7 +55,6 @@ else:
         "  pip install torch --index-url https://download.pytorch.org/whl/cu121"
     )
 
-# Palette HUD "Tesla dark-mode" (BGR) — identique au notebook
 HUD_BG = (28, 24, 20)
 HUD_ACCENT = (255, 255, 255)
 HUD_BLUE = (255, 149, 0)
