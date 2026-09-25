@@ -1,0 +1,19 @@
+# Core dependencies
+opencv-python>=4.8.0
+numpy>=1.24.0
+Pillow>=10.0.0
+
+# Deep learning
+torch>=2.1.0
+torchvision>=0.16.0
+ultralytics>=8.0.0
+onnxruntime>=1.16.0
+
+# Pose & Face detection
+mediapipe>=0.10.14
+
+# Audio (optional - for emergency vehicle siren detection)
+sounddevice>=0.4.6
+
+# GUI (tkinter is usually included with Python)
+# If missing: sudo apt-get install python3-tk
