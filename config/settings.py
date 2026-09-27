@@ -22,7 +22,8 @@ SCENARIOS = {
         "category": "DRIVER & PASSENGER SAFETY",
         "description": "Monitors driver attention using facial landmark analysis. Detects head pitch and eye closure to identify distraction. Triggers cruise control disengagement and speed reduction after 3 seconds of inattention.",
         "input_modes": ["video", "live_camera"],
-        "default_input": "live_camera",
+        "default_input": "video",
+        "demo_video": "scenario_1_driverDistraction.mp4",
         "model": None,  # Uses MediaPipe built-in
         "alerts": [
             "WARNING: EYES ON ROAD",
@@ -34,7 +35,8 @@ SCENARIOS = {
         "category": "DRIVER & PASSENGER SAFETY",
         "description": "Monitors passenger posture and seatbelt status using pose estimation. Detects forward/sideways leaning and feet on dashboard. Controls airbag deployment and speed limiting based on safety state.",
         "input_modes": ["video", "live_camera"],
-        "default_input": "live_camera",
+        "default_input": "video",
+        "demo_video": "scenario_2_passenger_posture.mp4",
         "model": None,  # Uses MediaPipe built-in
         "alerts": [
             "WARNING: PASSENGER UNBUCKLED & OUT OF POSITION",
@@ -62,7 +64,8 @@ SCENARIOS = {
         "category": "ROAD & ENVIRONMENT PERCEPTION",
         "description": "Segments the drivable road area using ONNX-based YOLOv8 segmentation. Computes lane center offset and provides steering correction recommendations.",
         "input_modes": ["image", "video"],
-        "default_input": "image",
+        "default_input": "video",
+        "demo_video": "scenario_4_drivable_area.mp4",
         "model": "yolov8n-seg.onnx",
         "alerts": ["ACTION: STEERING LEFT", "ACTION: STEERING RIGHT", "ACTION: KEEP LANE"],
     },
