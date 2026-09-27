@@ -37,3 +37,13 @@ output/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Original standalone scenario projects
+construction_zone/
+scenario_1_driver_distraction/
+scenario_2_passenger_posture/
+scenario_3_TSR/
+scenario_4_drivable_area/
+scenario_5_road_surface/
+scenario_7_vulnerable_road_user_detection/
+vehicle_intent_detection/
