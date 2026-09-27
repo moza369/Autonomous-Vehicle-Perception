@@ -387,7 +387,7 @@ The project also contains scenarios based on classical computer vision and Media
 
 ---
 
-# Installation
+# Installation & Usage
 
 ## Requirements
 
@@ -401,23 +401,51 @@ The project also contains scenarios based on classical computer vision and Media
 - MediaPipe
 - Tkinter
 
-Install the Python dependencies with:
+## 1. Clone the repository
 
 ```bash
+git clone git@github.com:moza369/Autonomous-Vehicle-Perception.git
+cd Autonomous-Vehicle-Perception
+```
+
+## 2. Create a virtual environment
+
+Using a virtual environment is **recommended** to avoid conflicts with Python packages installed on your system.
+
+### Linux / macOS
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### Windows
+
+```powershell
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+## 3. Install dependencies
+
+With the virtual environment activated:
+
+```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-On Debian/Ubuntu systems, if Tkinter is not installed:
+> **If you encounter dependency or package conflicts**, use a fresh virtual environment and reinstall the requirements.
+
+On Debian/Ubuntu systems, if Tkinter is missing:
 
 ```bash
 sudo apt install python3-tk
 ```
 
----
+## 4. Run the application
 
-# Running the Application
-
-From the repository root:
+From the repository root, with the virtual environment activated:
 
 ```bash
 python main.py
@@ -443,7 +471,58 @@ Depending on the scenario, the available inputs can include:
 
 Some scenarios have configured demonstration media that can be loaded directly from the application.
 
----
+## Troubleshooting
+
+### Dependency or import errors
+
+If you encounter errors such as `ModuleNotFoundError`, incompatible package versions, or conflicts with packages already installed on your system, create a clean virtual environment:
+
+```bash
+rm -rf .venv
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Then run:
+
+```bash
+python main.py
+```
+
+### Tkinter is missing
+
+On Debian/Ubuntu:
+
+```bash
+sudo apt install python3-tk
+```
+
+Then restart the application.
+
+### Verify the environment
+
+You can check that the main dependencies are available with:
+
+```bash
+python -c "import cv2, numpy, PIL, torch, torchvision, ultralytics, onnxruntime, mediapipe; print('All required Python imports: OK')"
+```
+
+A successful installation should print:
+
+```text
+All required Python imports: OK
+```
+
+### Deactivate the virtual environment
+
+When finished:
+
+```bash
+deactivate
+```
+
 
 # Example Data Flow
 
