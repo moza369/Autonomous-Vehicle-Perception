@@ -103,7 +103,7 @@ SCENARIOS = {
         "name": "Emergency Vehicle Detection",
         "category": "TRAFFIC UNDERSTANDING",
         "description": "Detects approaching emergency vehicles by analyzing flashing blue/red light patterns. Triggers pull-over maneuver when confirmed.",
-        "input_modes": ["video"],
+        "input_modes": ["video", "live_camera"],
         "default_input": "video",
         "model": None,  # Classical CV
         "demo_video": "scenario_9_Emergency_Vehicle.mp4",

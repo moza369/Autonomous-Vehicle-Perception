@@ -12,6 +12,8 @@ onnxruntime>=1.16.0
 # Pose & Face detection
 mediapipe>=0.10.14
 
+#Sound
+sounddevice>=0.4.6
 
 # GUI (tkinter is usually included with Python)
 # If missing: sudo apt-get install python3-tk
