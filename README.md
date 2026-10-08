@@ -368,7 +368,6 @@ This keeps scenario code independent from the current working directory.
 └── docs/
     ├── SCENARIO_CHANGES.md
     ├── DEVELOP_VS_MAIN.md
-    └── PRESENTATION_GUIDE.md
 ```
 
 ---
@@ -589,7 +588,6 @@ Additional project documentation:
 
 - [`SCENARIO_CHANGES.md`](docs/SCENARIO_CHANGES.md) — detailed scenario-by-scenario integration changes
 - [`DEVELOP_VS_MAIN.md`](docs/DEVELOP_VS_MAIN.md) — architecture and branch comparison
-- [`PRESENTATION_GUIDE.md`](docs/PRESENTATION_GUIDE.md) — presentation notes and technical questions for each scenario
 - [`CONTRIBUTORS.md`](CONTRIBUTORS.md) — project contributors
 
 ---
