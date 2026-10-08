@@ -20,8 +20,10 @@ class VideoManager:
         if not os.path.exists(path):
             raise FileNotFoundError(f"Video file not found: {path}")
         self._cap = cv2.VideoCapture(path)
+        
         if not self._cap.isOpened():
             raise RuntimeError(f"Could not open video: {path}")
+        
         self._source = path
         self._is_camera = False
         self._total_frames = int(self._cap.get(cv2.CAP_PROP_FRAME_COUNT))

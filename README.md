@@ -218,11 +218,9 @@ The final integrated version focuses on:
 - Red-light detection
 - Blue-light detection
 - Flashing-light behavior
+- Optional siren/audio detection
 - Emergency alert state
 - Pull-over guidance
-
-The final version does **not** use microphone/siren confirmation.
-
 ---
 
 # Architecture

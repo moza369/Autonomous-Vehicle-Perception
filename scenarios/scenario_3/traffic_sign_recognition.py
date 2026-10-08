@@ -22,14 +22,19 @@ class DecisionEngine:
     def determine_action(self, detected_classes):
         if "traffic_light_red" in detected_classes:
             self.action = "ACTION: RED LIGHT DETECTED - APPLYING BRAKES"
+
         elif "stop" in detected_classes:
             self.action = "ACTION: STOP SIGN DETECTED - APPLYING BRAKES"
+
         elif "traffic_light_yellow" in detected_classes:
             self.action = "WARNING: YELLOW LIGHT DETECTED - PREPARE TO STOP"
+
         elif "speed_limit" in detected_classes:
             self.action = "ACTION: ADJUSTING SPEED TO DETECTED LIMIT"
+
         elif "traffic_light_green" in detected_classes:
             self.action = "ACTION: GREEN LIGHT DETECTED - CONTINUE DRIVING"
+            
         else:
             self.action = "ACTION: CONTINUE DRIVING"
         return self.action

@@ -70,6 +70,7 @@ class DriverDistractionDetector:
             self._distraction_duration = now - self._distraction_start
             if self._distraction_duration >= WARNING_DURATION_LIMIT:
                 self._limp_mode = True
+                
         else:
             self._distraction_start = None
             self._distraction_duration = 0.0

@@ -129,8 +129,10 @@ class PerceptionDashboard:
         
         if "video" in data["input_modes"]:
             ttk.Button(inputs_frame, text="Select Video", command=self._select_video).pack(side=tk.LEFT, padx=5)
+
         if "image" in data["input_modes"]:
             ttk.Button(inputs_frame, text="Select Image", command=self._select_image).pack(side=tk.LEFT, padx=5)
+
         if "live_camera" in data["input_modes"]:
             ttk.Button(inputs_frame, text="Live Camera", command=self._select_camera).pack(side=tk.LEFT, padx=5)
             
@@ -195,8 +197,10 @@ class PerceptionDashboard:
     def _update_status(self, text, state="ready"):
         self.status_label.config(text=text)
         if state == "ready":
+
             self.status_label.config(foreground=COLORS["status_ready"])
         elif state == "running":
+
             self.status_label.config(foreground=COLORS["status_running"])
         elif state == "error":
             self.status_label.config(foreground=COLORS["status_error"])
@@ -248,8 +252,10 @@ class PerceptionDashboard:
         try:
             if self.current_input_mode == "video":
                 self.video_manager.open_video(self.current_input_path)
+
             elif self.current_input_mode == "live_camera":
                 self.video_manager.open_camera(self.current_input_path)
+                
             elif self.current_input_mode == "image":
                 img = self.video_manager.read_image(self.current_input_path)
                 self._process_single_image(img)
