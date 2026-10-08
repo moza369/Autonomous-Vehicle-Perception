@@ -642,6 +642,11 @@ The objective was to integrate multiple autonomous-vehicle perception scenarios 
 
 
 ---
+## Contributors
+
+A big thank you to all **20 contributors** for their work and collaboration on this project.
+
+See [`CONTRIBUTORS.md`](CONTRIBUTORS.md) for the complete list of contributors and their contributions.
 
 # License
 
