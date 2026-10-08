@@ -6,10 +6,20 @@ An integrated autonomous-vehicle perception platform combining **9 computer-visi
 
 The system processes video files, images, and live camera input depending on the scenario, producing annotated frames and structured telemetry through a common detector interface.
 
+
+## Application Preview
+
+![Application Dashboard](assets/images/dashboard.png)
+
+### Demo
+
+[![Autonomous Vehicle Perception System — Demo](assets/images/demo-thumbnail.png)](https://www.youtube.com/watch?v=t8oSjpSQ4ao)
+
+> Demonstration of the integrated perception scenarios running through the Tkinter dashboard.
+
 > **Project status:** Final integrated university prototype
 > **Main branch:** Final integrated application
 > **Develop branch:** Original team scenario implementations and development history
-
 ---
 
 ## Overview
@@ -397,6 +407,7 @@ The project also contains scenarios based on classical computer vision and Media
 - ONNX Runtime
 - MediaPipe
 - Tkinter
+- Sounddevice (optional, for siren/audio detection)
 
 ## 1. Clone the repository
 
@@ -628,6 +639,7 @@ The system should therefore be considered a perception and decision-making proto
 This project was developed as part of the **Master MIATE — Computer Vision** coursework.
 
 The objective was to integrate multiple autonomous-vehicle perception scenarios into a unified application while maintaining the individual scenario implementations and development history of the team.
+
 
 ---
 
