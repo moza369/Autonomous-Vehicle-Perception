@@ -73,8 +73,8 @@ Repository Maintainer
 <table>
 <tr>
 <td align="center">
-<a href="https://github.com/Amine0210">
-<img src="https://github.com/Amine0210.png" width="90px;" alt="Amine"/><br>
+<a href="https://github.com/miamoto88">
+<img src="https://github.com/miamoto88.png" width="90px;" alt="Amine"/><br>
 <b>Mohamed Amine Chablaoui</b>
 </a>
 </td>
